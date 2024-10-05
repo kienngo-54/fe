@@ -1,11 +1,41 @@
 import React from "react";
-import { Flex, Image, Typography } from "antd";
+import { Button, Flex, Image, Typography } from "antd";
 import { useStyle } from "../../themes/baseStyle";
 import { FaUserGroup } from "react-icons/fa6";
 import IMAGES from "../../constants/images";
+import { IField } from "../../@types/entities/Field";
+import { d3Splitting } from "../../utils/number";
+import { bookingField } from "../../apis/booking";
+import { toast } from "react-toastify";
 
-function FootballField() {
+interface FootballFieldProps {
+  data: IField;
+  dateInfo: {
+    date: string;
+    startTime: string;
+    endTime: string;
+  };
+}
+function FootballField(props: FootballFieldProps) {
+  const { data, dateInfo } = props;
   const { styles } = useStyle();
+
+  const handleBooking = async () => {
+    await bookingField({
+      body: {
+        date: dateInfo.date,
+        fieldId: data._id,
+        startTime: dateInfo.startTime,
+        endTime: dateInfo.endTime,
+      },
+      successHandler: {
+        callBack(data) {
+          toast.success("Đặt sân thành công!");
+        },
+      },
+    });
+  };
+
   return (
     <Flex className={styles.borderGradient}>
       <Flex
@@ -33,44 +63,25 @@ function FootballField() {
               color: "rgba(2, 106, 167, 1)",
             }}
           >
-            Sân bóng HCM
+            {data.name}
           </Typography.Title>
           <Typography.Text style={{ fontSize: 12, fontWeight: 600 }}>
-            Thời gian: 16h30 - 17h30
+            Môn thể thao: {data.sport}
           </Typography.Text>
           <Typography.Text
             style={{ fontSize: 12, color: "rgba(77, 127, 203, 1)" }}
           >
-            Bình Hưng, Bình Chánh, Tp HCM
+            Vị trí: {data.location}
           </Typography.Text>
         </Flex>
+
         <Flex justify="space-between">
-          <Flex
-            style={{
-              padding: "3px 6px",
-              backgroundColor: "rgba(0, 91, 144, 1)",
-              borderRadius: 2,
-            }}
-          >
-            <Typography.Text
-              style={{
-                fontSize: 12,
-                fontWeight: 600,
-                color: "#fff",
-                margin: 0,
-                lineHeight: "normal",
-              }}
-            >
-              8.39
-            </Typography.Text>
-          </Flex>
-          <Flex style={{}}>
+          <Flex gap={8}>
             <Flex
               style={{
                 padding: "3px 6px",
-                borderRadius: "2px 0 0 2px",
-
-                backgroundColor: "#000",
+                backgroundColor: "rgba(0, 91, 144, 1)",
+                borderRadius: 2,
               }}
             >
               <Typography.Text
@@ -82,7 +93,7 @@ function FootballField() {
                   lineHeight: "normal",
                 }}
               >
-                6
+                {`${d3Splitting(data.price)} VNĐ`}
               </Typography.Text>
             </Flex>
             <Flex
@@ -91,7 +102,7 @@ function FootballField() {
               style={{
                 padding: "3px 6px",
                 backgroundColor: "rgba(38, 150, 216, 1)",
-                borderRadius: "0 2px 2px 0",
+                borderRadius: "2px",
               }}
             >
               <Typography.Text
@@ -103,11 +114,17 @@ function FootballField() {
                   lineHeight: "normal",
                 }}
               >
-                8
+                {data.capacity}
               </Typography.Text>
               <FaUserGroup style={{ fontSize: 10, color: "#fff" }} />
             </Flex>
           </Flex>
+          <Button
+            onClick={handleBooking}
+            style={{ height: 20, cursor: "pointer" }}
+          >
+            Đặt sân
+          </Button>
         </Flex>
       </Flex>
     </Flex>

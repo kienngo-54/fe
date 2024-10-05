@@ -5,6 +5,8 @@ import {
   Flex,
   Form,
   FormProps,
+  Input,
+  InputNumber,
   Row,
   Select,
   Typography,
@@ -23,35 +25,43 @@ interface FieldType {
   timeFrame: string;
   location: string;
   sport: string;
+  capacity?: number;
 }
 
 function Filter() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [listField, setListField] = useState<IField[]>([]);
+  const [dateInfo, setDateInfo] = useState<{
+    date: string;
+    startTime: string;
+    endTime: string;
+  }>({
+    date: "",
+    startTime: "",
+    endTime: "",
+  });
   const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
     setIsLoading(true);
-    // console.log({
-    //   date: dayjs(values.date).format("YYYY-MM-DD"),
-    //   location: values.location,
-    //   sport: values.sport,
-    //   page: 1,
-    //   startTime: values.timeFrame.split(" - ")[0],
-    //   endTime: values.timeFrame.split(" - ")[1],
-    //   record: Number.MAX_SAFE_INTEGER,
-    // });
+    const dataForm = {
+      date: dayjs(values.date).format("YYYY-MM-DD"),
+      location: values.location,
+      capacity: values.capacity,
+      sport: values.sport,
+      page: 1,
+      startTime: values.timeFrame.split(" - ")[0],
+      endTime: values.timeFrame.split(" - ")[1],
+      record: Number.MAX_SAFE_INTEGER,
+    };
     await findField({
-      query: {
-        date: dayjs(values.date).format("YYYY-MM-DD"),
-        location: values.location,
-        sport: values.sport,
-        page: 1,
-        startTime: values.timeFrame.split(" - ")[0],
-        endTime: values.timeFrame.split(" - ")[1],
-        record: Number.MAX_SAFE_INTEGER,
-      },
+      query: { ...dataForm },
       successHandler: {
         callBack(data) {
           setListField(data.data);
+          setDateInfo({
+            date: dataForm.date,
+            startTime: dataForm.startTime,
+            endTime: dataForm.endTime,
+          });
         },
       },
       errorHandler: {
@@ -130,6 +140,15 @@ function Filter() {
             </Form.Item>
           </Col>
           <Col span={2}>
+            <Form.Item<FieldType>
+              label="Sức chứa"
+              name="capacity"
+              style={{ marginBottom: 8 }}
+            >
+              <InputNumber />
+            </Form.Item>
+          </Col>
+          <Col span={2}>
             <Form.Item<FieldType> label="Hành động" style={{ marginBottom: 8 }}>
               <Button htmlType="submit" type="primary">
                 Tìm kiếm
@@ -142,7 +161,7 @@ function Filter() {
         {listField.length > 0 ? (
           <>
             {listField.map((item) => (
-              <FootballField />
+              <FootballField data={item} dateInfo={dateInfo}/>
             ))}
           </>
         ) : (

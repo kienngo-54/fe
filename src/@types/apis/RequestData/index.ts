@@ -42,6 +42,7 @@ export interface RDCreateMyTeam extends RDCommon {
 
 export interface RDFindField extends RDCommon {
   query?: {
+    capacity?: number;
     date: string;
     startTime: string;
     endTime: string;
@@ -49,5 +50,17 @@ export interface RDFindField extends RDCommon {
     sport: string;
     page?: number;
     record?: number;
+  };
+}
+
+export interface RDBookingField extends RDCommon {
+  body: {
+    fieldId: string;
+    date: string;
+    startTime: string;
+    endTime: string;
+    equipmentId?: string;
+    refereeId?: string;
+    trainerId?: string;
   };
 }

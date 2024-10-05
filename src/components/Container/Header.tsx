@@ -141,12 +141,14 @@ function AppHeader() {
           </Flex>
           <Flex gap={8} align="center" style={{ cursor: "pointer" }}>
             <SafetyOutlined style={{ fontSize: 20, color: "#fff" }} />
-            <Typography.Paragraph
-              className={styles.textBodyPrimary}
-              style={{ color: "#fff", fontWeight: 600, margin: 0 }}
-            >
-              Cáp kèo - Tìm đối thủ
-            </Typography.Paragraph>
+            <Link to={ROUTE.MATCHING}>
+              <Typography.Paragraph
+                className={styles.textBodyPrimary}
+                style={{ color: "#fff", fontWeight: 600, margin: 0 }}
+              >
+                Cáp kèo - Tìm đối thủ
+              </Typography.Paragraph>
+            </Link>
           </Flex>
           <Flex gap={8} align="center" style={{ cursor: "pointer" }}>
             <SearchOutlined style={{ fontSize: 20, color: "#fff" }} />

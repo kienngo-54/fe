@@ -6,6 +6,7 @@ enum END_POINT {
   REFRESH_TOKEN = "/user/me",
   MY_TEAM = "/user/team",
   FIELD = "/user/field",
+  BOOKING_FIELD = "/user/booking",
 }
 
 export default END_POINT;

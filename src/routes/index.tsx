@@ -10,6 +10,7 @@ import RegisterPage from "../pages/register";
 import NotFoundPage from "../pages/notFound";
 import TeamPage from "../pages/team";
 import FindFieldPage from "../pages/findField";
+import MatchingPage from "../pages/matching";
 
 interface AppRoute {
   path: string;
@@ -48,13 +49,19 @@ const routes: AppRoute[] = [
     path: ROUTE.MY_TEAM,
     title: "Đội của tôi",
     element: TeamPage,
-    isPrivate: false,
+    isPrivate: true,
   },
   {
     path: ROUTE.FIND_FIELD,
     title: "Tìm sân",
     element: FindFieldPage,
-    isPrivate: false,
+    isPrivate: true,
+  },
+  {
+    path: ROUTE.MATCHING,
+    title: "Cáp kèo - Tìm đối thử",
+    element: MatchingPage,
+    isPrivate: true,
   },
   {
     path: "*",

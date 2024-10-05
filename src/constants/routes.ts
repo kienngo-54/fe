@@ -5,6 +5,7 @@ enum ROUTE {
   REGISTER = "/register",
   MY_TEAM = "/my-team",
   FIND_FIELD = "/find-field",
+  MATCHING = "/matching",
   PAGE_FORBIDDEN = "/403",
   PAGE_NOT_FOUND = "404",
 }
