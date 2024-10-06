@@ -157,11 +157,11 @@ function Filter() {
           </Col>
         </Row>
       </Form>
-      <Flex>
+      <Flex gap={16}>
         {listField.length > 0 ? (
           <>
             {listField.map((item) => (
-              <FootballField data={item} dateInfo={dateInfo}/>
+              <FootballField data={item} dateInfo={dateInfo} />
             ))}
           </>
         ) : (

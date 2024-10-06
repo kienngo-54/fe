@@ -1,4 +1,4 @@
-import LOCAL_FORAGE_KEY from '../constants/localForageKey';
+import LOCAL_FORAGE_KEY from "../constants/localForageKey";
 
 export function getLocalForageItem(key: LOCAL_FORAGE_KEY): string | undefined {
   try {
@@ -10,7 +10,7 @@ export function getLocalForageItem(key: LOCAL_FORAGE_KEY): string | undefined {
 
 export function setLocalForageItem(
   key: LOCAL_FORAGE_KEY,
-  value: string | undefined,
+  value: string | undefined
 ): void {
   if (value) {
     localStorage.setItem(key, value);
@@ -20,9 +20,3 @@ export function setLocalForageItem(
 export function removeLocalForageItem(key: LOCAL_FORAGE_KEY) {
   return localStorage.removeItem(key);
 }
-
-export default {
-  getLocalForageItem,
-  setLocalForageItem,
-  removeLocalForageItem,
-};

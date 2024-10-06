@@ -30,11 +30,6 @@ export const cloneAndDeleteProperty = <T, K extends keyof T>(
   const { [propToDelete]: _, ...clonedObj } = obj;
   return clonedObj;
 };
-export default {
-  jsonStringify,
-  jsonParse,
-  cloneAndDeleteProperty,
-};
 
 export const differenceObject = (origObj: any, newObj: any): any => {
   // eslint-disable-next-line @typescript-eslint/no-shadow

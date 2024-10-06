@@ -64,3 +64,30 @@ export interface RDBookingField extends RDCommon {
     trainerId?: string;
   };
 }
+
+export interface RDCreateMatchingField extends RDCommon {
+  body: {
+    fieldId: string;
+    startTime: string;
+    endTime: string;
+    date: string;
+    message?: string;
+    max_number: number;
+    sport: string;
+    totalPrice: number;
+  };
+}
+
+export interface RDGetListMatching extends RDCommon {
+  query?: {
+    p?: number;
+    r?: number;
+  };
+}
+
+export interface RDJoinMatching extends RDCommon {
+  body: {
+    matchingId: string;
+    quantity: number;
+  };
+}

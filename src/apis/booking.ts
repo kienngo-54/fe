@@ -47,7 +47,6 @@ export const getListBookingField = async ({
   errorHandler,
 }: {
   name?: string;
-
   successHandler?: TApiProps<
     RDCommon,
     TResponseDataObj<any>,

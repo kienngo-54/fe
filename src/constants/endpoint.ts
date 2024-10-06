@@ -7,6 +7,7 @@ enum END_POINT {
   MY_TEAM = "/user/team",
   FIELD = "/user/field",
   BOOKING_FIELD = "/user/booking",
+  MATCHING = "/user/matching",
 }
 
 export default END_POINT;
