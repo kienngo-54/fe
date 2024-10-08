@@ -133,7 +133,12 @@ function FootballField(props: FootballFieldProps) {
             Đặt sân
           </Button>
         </Flex>
-        <PayModal open={isOpen} data={data} onClose={handleClose} />
+        <PayModal
+          open={isOpen}
+          data={data}
+          onClose={handleClose}
+          dateInfo={dateInfo}
+        />
       </Flex>
     </Flex>
   );
