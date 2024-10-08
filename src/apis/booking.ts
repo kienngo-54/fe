@@ -68,3 +68,38 @@ export const getListBookingField = async ({
 
   return result;
 };
+
+export const handlePaypalSuccess = async ({
+  name = "handlePaypalSuccess",
+  body,
+  successHandler,
+  errorHandler,
+}: {
+  name?: string;
+  body: {
+    orderId: string;
+  };
+  successHandler?: TApiProps<
+    RDCommon,
+    TResponseDataObj<any>,
+    any
+  >["successHandler"];
+  errorHandler?: TApiProps<
+    RDCommon,
+    TResponseDataObj<any>,
+    TResponseErrorCommon<undefined>
+  >["errorHandler"];
+}) => {
+  const result = await callApi<RDCommon, TResponseDataObj<any>>({
+    name,
+    data: {
+      body,
+    },
+    path: END_POINT.CHECK_PAYPAL,
+    method: "POST",
+    successHandler,
+    errorHandler,
+  });
+
+  return result;
+};

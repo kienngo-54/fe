@@ -8,6 +8,7 @@ enum END_POINT {
   FIELD = "/user/field",
   BOOKING_FIELD = "/user/booking",
   MATCHING = "/user/matching",
+  CHECK_PAYPAL = "/user/payment/capture",
 }
 
 export default END_POINT;

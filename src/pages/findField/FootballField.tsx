@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Flex, Image, Typography } from "antd";
 import { useStyle } from "../../themes/baseStyle";
 import { FaUserGroup } from "react-icons/fa6";
@@ -7,6 +7,7 @@ import { IField } from "../../@types/entities/Field";
 import { d3Splitting } from "../../utils/number";
 import { bookingField } from "../../apis/booking";
 import { toast } from "react-toastify";
+import PayModal from "./PayModal";
 
 interface FootballFieldProps {
   data: IField;
@@ -19,21 +20,27 @@ interface FootballFieldProps {
 function FootballField(props: FootballFieldProps) {
   const { data, dateInfo } = props;
   const { styles } = useStyle();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const handleBooking = async () => {
-    await bookingField({
-      body: {
-        date: dateInfo.date,
-        fieldId: data._id,
-        startTime: dateInfo.startTime,
-        endTime: dateInfo.endTime,
-      },
-      successHandler: {
-        callBack(data) {
-          toast.success("Đặt sân thành công!");
-        },
-      },
-    });
+    // await bookingField({
+    //   body: {
+    //     date: dateInfo.date,
+    //     fieldId: data._id,
+    //     startTime: dateInfo.startTime,
+    //     endTime: dateInfo.endTime,
+    //   },
+    //   successHandler: {
+    //     callBack(data) {
+    //       toast.success("Đặt sân thành công!");
+    //     },
+    //   },
+    // });
+    setIsOpen(true);
+  };
+
+  const handleClose = () => {
+    setIsOpen(false);
   };
 
   return (
@@ -126,6 +133,7 @@ function FootballField(props: FootballFieldProps) {
             Đặt sân
           </Button>
         </Flex>
+        <PayModal open={isOpen} data={data} onClose={handleClose} />
       </Flex>
     </Flex>
   );
